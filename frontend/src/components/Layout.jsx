@@ -1,10 +1,16 @@
 import { Link } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Add, AddInventory, Home, Inventory, Menu } from "./Icons";
 import Button from "./Button";
 
 export default function Layout(props) {
  const [open, setOpen] = useState(false);
+ useEffect(() => {
+  window.scrollTo({
+   top: 0,
+   behavior: "smooth",
+  });
+ }, []);
  return (
   <div className="p-9">
    <nav className="pb-9 flex flex-col lg:flex-row gap-4 lg:justify-between lg:items-center">
@@ -16,7 +22,9 @@ export default function Layout(props) {
     </div>
     <div className="flex gap-2 justify-between">
      <Button
-      className="lg:hidden !text-[16px] font-bold rounded-full !py-1 !px-2.5 bg-transparent border-2 text-primary"
+      className={`lg:hidden !text-[16px] font-bold rounded-full !py-1 !px-2.5 !bg-transparent border-2 ${
+       open ? "!text-black !bg-black/5" : "!text-primary"
+      }`}
       onClick={() => setOpen(!open)}
      >
       <div className="stroke-white fill-white">

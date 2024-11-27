@@ -1,6 +1,8 @@
+import { Link } from "react-router";
 import Button from "../components/Button";
+import { ArrowRight } from "../components/Icons";
 import Layout from "../components/Layout";
-import InventoryTable from './../components/InventoryTable';
+import InventoryTable from "./../components/InventoryTable";
 
 export default function Dashboard() {
  return (
@@ -38,7 +40,7 @@ export default function Dashboard() {
      {
       category: "O-",
       value: 10,
-     }
+     },
     ].map((item, index) => (
      <div
       key={index}
@@ -58,9 +60,14 @@ export default function Dashboard() {
    <div className="mt-9">
     <div className="flex justify-between items-center">
      <h3 className="font-bold !text-[23px]">Inventory</h3>
-     <Button className="!text-[16px] font-bold rounded-full flex justify-center items-center gap-2 !py-1.5">
-      View Full Inventory
-     </Button>
+     <Link to="/inventory">
+      <Button className="!text-[16px] font-bold !rounded-full flex justify-center items-center gap-2 !py-1.5">
+       View Full Inventory{" "}
+       <div className="fill-white">
+        <ArrowRight />
+       </div>
+      </Button>
+     </Link>
     </div>
     <hr className="border-t-2 mt-4" />
 
