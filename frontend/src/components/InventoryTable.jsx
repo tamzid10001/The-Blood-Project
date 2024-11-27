@@ -2,7 +2,7 @@ import Button from "./Button";
 
 export default function InventoryTable() {
  return (
-  <div className="relative overflow-x-auto mt-3 max-h-[90vh]">
+  <div className="relative overflow-auto whitespace-nowrap mt-3 max-h-[90vh]">
    <table className="w-full text-sm text-left rtl:text-right text-gray-400 border-separate border-spacing-y-3">
     <thead className="!text-[14px]">
      <tr>
