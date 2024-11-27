@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { Delete } from "./Icons";
 
 export default function InventoryTable() {
  return (
@@ -40,10 +41,13 @@ export default function InventoryTable() {
          AB+
         </h3>
        </td>
-       <td className="px-6 py-2 rounded-tr-lg rounded-br-lg">
+       <td className="px-6 py-2 rounded-tr-lg rounded-br-lg flex gap-2 items-center">
         <Button className="!text-[14px] font-bold rounded-full flex justify-center items-center gap-2 !py-1.5">
          Mark Sold
         </Button>
+        <button className="text-primary cursor-pointer active:scale-95">
+         <Delete />
+        </button>
        </td>
       </tr>
      ))}
