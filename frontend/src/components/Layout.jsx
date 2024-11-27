@@ -70,9 +70,16 @@ export default function Layout(props) {
        ))}
       </div>
       <hr className="my-4 border-t-2" />
-      <div className="py-3 hover:opacity-70 cursor-pointer active:scale-95">
-       <h3 className="text-[14px] font-semibold">Tamim Iqbal</h3>
-       <p className="text-[12px] text-gray-400">tamimiqbal@gmail.com</p>
+      <div className="w-full flex justify-between py-3">
+       <div className="hover:opacity-70 cursor-pointer active:scale-95">
+        <h3 className="text-[14px] font-semibold">Tamim Iqbal</h3>
+        <p className="text-[12px] text-gray-400">tamimiqbal@gmail.com</p>
+       </div>
+       <Link to="/login">
+        <p className="w-fit cursor-pointer active:scale-95 select-none text-[12px] text-primary mt-2">
+         Logout
+        </p>
+       </Link>
       </div>
      </div>
      <div className="fixed bottom-[40px]">

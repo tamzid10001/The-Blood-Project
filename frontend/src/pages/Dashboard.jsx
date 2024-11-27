@@ -38,11 +38,7 @@ export default function Dashboard() {
      {
       category: "O-",
       value: 10,
-     },
-     {
-      category: "A+",
-      value: 10,
-     },
+     }
     ].map((item, index) => (
      <div
       key={index}
