@@ -16,6 +16,14 @@ const checkLogin = async (req, res, next) => {
   req.name = name;
   req.bankName = bankName;
   req.email = email;
+  await User.updateOne(
+   { _id: userId },
+   {
+    $set: {
+     lastLoginAt: new Date(),
+    },
+   }
+  );
   next();
  } catch {
   next("Authentication failed!");
