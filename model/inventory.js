@@ -98,20 +98,9 @@ const inventorySchema = mongoose.Schema(
     },
    ],
   },
-  bag_quantity: {
-   type: Number,
-   required: true,
-   validate: {
-    validator: function (v) {
-     return v > 0;
-    },
-    message: "Quantity must be greater than 0!",
-   },
-  },
-  status: {
-   default: "pending",
-   type: String,
-   enum: ["pending", "received"],
+  is_sold: {
+   default: false,
+   type: Boolean,
   },
  },
  {

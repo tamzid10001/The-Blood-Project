@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { verifyToken } from "../utils/API";
 
-import { Add, AddInventory, Home, Inventory, Menu } from "./Icons";
+import { Add, AddInventory, Home, Inventory, Logout, Menu } from "./Icons";
 import Button from "./Button";
 
 export default function Layout(props) {
@@ -119,7 +119,7 @@ export default function Layout(props) {
        ))}
       </div>
       <hr className="my-4 border-t-2" />
-      <div className="w-full flex justify-between py-3">
+      <div className="w-full flex justify-between items-center py-3">
        <div className="hover:opacity-70 cursor-pointer active:scale-95">
         <h3 className="text-[14px] font-semibold">{name || "Unknown"}</h3>
         <p className="text-[12px] text-gray-400">{email || "error occurred"}</p>
@@ -132,8 +132,8 @@ export default function Layout(props) {
          window.location.href = "/";
         }}
        >
-        <p className="w-fit cursor-pointer active:scale-95 select-none text-[12px] text-primary mt-2">
-         Logout
+        <p className="w-fit cursor-pointer active:scale-95 select-none text-[12px] fill-primary bg-primary/10 rounded-md p-1.5">
+         <Logout />
         </p>
        </button>
       </div>

@@ -21,7 +21,6 @@ export default function AddInventory() {
     },
     blood_group: document.querySelector('input[name="blood-group"]:checked')
      .value,
-    bag_quantity: 1,
    },
    (e) => {
     document.getElementById("error-message").classList.remove("hidden");

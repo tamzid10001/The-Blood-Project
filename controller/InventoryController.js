@@ -55,14 +55,13 @@ router.post("/byDate", checkLogin, async (req, res, next) => {
 /* POST - create inventory */
 router.post("/create", checkLogin, async (req, res, next) => {
  try {
-  const { donor_name, id, date, address, blood_group, bag_quantity } = req.body;
+  const { donor_name, id, date, address, blood_group } = req.body;
   const data = await Inventory.create({
    donor_name,
    id,
    date,
    address,
    blood_group,
-   bag_quantity,
    index: (await Inventory.find()).length + 1,
   });
   res.status(201).json({
@@ -74,17 +73,17 @@ router.post("/create", checkLogin, async (req, res, next) => {
  }
 });
 
-/* UPDATE - mark inventory as received */
-router.put("/mark-received/:id", checkLogin, async (req, res, next) => {
+/* UPDATE - mark status of inventory as sold */
+router.put("/mark-sold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
   const data = await Inventory.findOneAndUpdate(
    { id },
-   { received: true },
+   { is_sold: true },
    { new: true }
   );
   res.status(200).json({
-   message: "Successfully updated inventory!",
+   message: "Successfully marked inventory as sold!",
    data,
   });
  } catch (err) {

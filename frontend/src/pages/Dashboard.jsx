@@ -11,35 +11,35 @@ export default function Dashboard() {
     {[
      {
       category: "A+",
-      value: 10,
+      value: 0,
      },
      {
       category: "A-",
-      value: 10,
+      value: 0,
      },
      {
       category: "B+",
-      value: 10,
+      value: 0,
      },
      {
       category: "B-",
-      value: 10,
+      value: 0,
      },
      {
       category: "AB+",
-      value: 10,
+      value: 0,
      },
      {
       category: "AB-",
-      value: 10,
+      value: 0,
      },
      {
       category: "O+",
-      value: 10,
+      value: 0,
      },
      {
       category: "O-",
-      value: 10,
+      value: 0,
      },
     ].map((item, index) => (
      <div

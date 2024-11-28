@@ -350,3 +350,51 @@ export const addInventory = async (data, error, callback) => {
    });
   });
 };
+
+export const markInventoryAsSold = async (id, error, callback) => {
+ return await fetch(`/api/inventory/mark-sold/${id}`, {
+  method: "PUT",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
+
+export const deleteInventory = async (id, error, callback) => {
+ return await fetch(`/api/inventory/delete/${id}`, {
+  method: "DELETE",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};

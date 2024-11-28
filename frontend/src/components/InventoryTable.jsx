@@ -1,4 +1,8 @@
-import { getInventoryByIndexes } from "../utils/API";
+import {
+ deleteInventory,
+ getInventoryByIndexes,
+ markInventoryAsSold,
+} from "../utils/API";
 import { useEffect, useState } from "react";
 
 import Button from "./Button";
@@ -20,6 +24,36 @@ export default function InventoryTable({ from, to, setTotal }) {
    }
   );
  }, [from, to]);
+ function markSold(id) {
+  const cnfrm = confirm(
+   "Are you sure you want to mark this inventory as sold?"
+  );
+  if (cnfrm) {
+   markInventoryAsSold(
+    id,
+    (e) => {
+     console.log(e);
+    },
+    () => {
+     window.location.reload();
+    }
+   );
+  }
+ }
+ function deleteOne(id) {
+  const cnfrm = confirm("Are you sure you want to delete this inventory?");
+  if (cnfrm) {
+   deleteInventory(
+    id,
+    (e) => {
+     console.log(e);
+    },
+    () => {
+     window.location.reload();
+    }
+   );
+  }
+ }
  return (
   <div className="relative overflow-auto whitespace-nowrap mt-3 max-h-[90vh]">
    <table className="w-full text-sm text-left rtl:text-right text-gray-400 border-separate border-spacing-y-3">
@@ -63,11 +97,19 @@ export default function InventoryTable({ from, to, setTotal }) {
            {i.blood_group}
           </h3>
          </td>
-         <td className="px-6 py-2 rounded-tr-lg rounded-br-lg flex gap-2 items-center">
-          <Button className="!text-[14px] font-bold rounded-full flex justify-center items-center gap-2 !py-1.5">
-           Mark Sold
+         <td className="px-6 py-2 rounded-tr-lg rounded-br-lg flex gap-2 items-center justify-between">
+          <Button
+           className={`!text-[14px] font-bold rounded-full flex justify-center items-center gap-2 !py-1.5 ${
+            i.is_sold ? "!bg-black !text-white" : ""
+           }`}
+           onClick={!i.is_sold ? () => markSold(i.id) : () => {}}
+          >
+           {i.is_sold ? "Sold" : "Mark Sold"}
           </Button>
-          <button className="text-primary cursor-pointer active:scale-95">
+          <button
+           className="text-primary cursor-pointer active:scale-95"
+           onClick={() => deleteOne(i.id)}
+          >
            <Delete />
           </button>
          </td>
