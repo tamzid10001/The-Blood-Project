@@ -1,21 +1,45 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { getUserData, verifyToken } from "../utils/API";
+
 import { Add, AddInventory, Home, Inventory, Menu } from "./Icons";
 import Button from "./Button";
 
 export default function Layout(props) {
  const [open, setOpen] = useState(false);
+ const [user, setUser] = useState({});
+ let navigate = useNavigate();
+
  useEffect(() => {
   window.scrollTo({
    top: 0,
    behavior: "smooth",
   });
+
+  if (window.localStorage.getItem("lxoxg")) {
+   verifyToken(() => {
+    return navigate("/login");
+   });
+  } else {
+   return navigate("/login");
+  }
+
+  getUserData(
+   (err) => {
+    alert(err.error);
+   },
+   (data) => {
+    setUser(data.data);
+   }
+  );
  }, []);
  return (
   <div className="p-9">
    <nav className="pb-9 flex flex-col lg:flex-row gap-4 lg:justify-between lg:items-center">
     <div>
-     <h3 className="text-2xl font-semibold">Welcome, Tamim 👏🏻</h3>
+     <h3 className="text-2xl font-semibold">
+      Welcome, {user?.name?.split(" ").slice(-1)[0] || "User"} 👏🏻
+     </h3>
      <p className="text-[16px] font-medium text-gray-400">
       Kushtia GH Blood Bank
      </p>
@@ -94,8 +118,10 @@ export default function Layout(props) {
       <hr className="my-4 border-t-2" />
       <div className="w-full flex justify-between py-3">
        <div className="hover:opacity-70 cursor-pointer active:scale-95">
-        <h3 className="text-[14px] font-semibold">Tamim Iqbal</h3>
-        <p className="text-[12px] text-gray-400">tamimiqbal@gmail.com</p>
+        <h3 className="text-[14px] font-semibold">{user.name || "Unknown"}</h3>
+        <p className="text-[12px] text-gray-400">
+         {user.email || "error occurred"}
+        </p>
        </div>
        <Link to="/login">
         <p className="w-fit cursor-pointer active:scale-95 select-none text-[12px] text-primary mt-2">

@@ -23,31 +23,10 @@ router.get("/verify", checkLogin, async (req, res) => {
  }
 });
 
-/* GET - get all users */
+/* GET - get current user */
 router.get("/", checkLogin, async (req, res) => {
  try {
-  const data = await User.find()
-   .limit(parseInt(req.body.endAt))
-   .skip(parseInt(req.body.startAt))
-   .select("-password");
-  res.status(200).json({
-   message: "Users were fetched successfully!",
-   data: data || [],
-  });
- } catch (err) {
-  res.status(500).json({
-   error: err.message || "Some error occurred!",
-  });
- }
-});
-
-/* GET - get a user by id */
-router.get("/:username", checkLogin, async (req, res) => {
- try {
-  const data =
-   (await User.findOne({ username: req.params.username }).select(
-    "-password"
-   )) || {};
+  const data = await User.findOne({ _id: req.userId }).select("-password");
   res.status(200).json({
    message: "User was fetched successfully!",
    data,
@@ -61,9 +40,9 @@ router.get("/:username", checkLogin, async (req, res) => {
 
 /* POST - create a new user */
 router.post("/signup", async (req, res) => {
- if (req.body.username && req.body.password && req.body.email) {
+ if (req.body.name && req.body.password && req.body.email) {
   const newUser = new User({
-   username: req.body.username,
+   name: req.body.name,
    password: bcrypt.hashSync(req.body.password, 10),
    email: req.body.email,
    createdAt: Date.now(),
@@ -91,14 +70,14 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
  try {
   let reqObj = {};
-  if (req.body.username) reqObj = { username: req.body.username };
+  if (req.body.name) reqObj = { name: req.body.name };
   if (req.body.email) reqObj = { email: req.body.email };
   const user = await User.findOne(reqObj);
   if (user) {
    if (bcrypt.compareSync(req.body.password, user.password)) {
     const token = jwt.sign(
      {
-      username: user.username,
+      name: user.name,
       userId: user._id,
      },
      process.env.JWT_SECRET,

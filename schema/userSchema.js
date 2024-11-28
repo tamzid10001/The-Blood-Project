@@ -7,9 +7,9 @@ const userSchema = mongoose.Schema({
   validate: [
    {
     validator: function (v) {
-     return /^[a-zA-Z0-9_-]+$/.test(v);
+     return /^[a-zA-Z ]+$/.test(v);
     },
-    message: "Name should only contain alphanumeric chars, underscore, and dash!",
+    message: "Name can only contain letters and spaces!",
    },
    {
     validator: function (v) {

@@ -9,7 +9,7 @@ const userHandler = require("./handlers/userHandler");
 /* express app initialization */
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend/dist/")));
+app.use(express.static(path.join(__dirname, "frontend/dist")));
 app.use(
  cors({
   origin: "*",
@@ -27,7 +27,7 @@ mongoose
 /* application routes */
 app.use("/api/user", userHandler);
 app.get("*", (req, res) => {
- res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+ res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });
 
 /* default error handler */

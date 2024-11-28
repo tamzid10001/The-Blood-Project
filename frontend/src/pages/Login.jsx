@@ -2,8 +2,25 @@ import { Link } from "react-router";
 import Label from "../components/Label";
 import Input from "./../components/Input";
 import Button from "./../components/Button";
+import { logIn } from "../utils/API";
 
 export default function Login() {
+ function submit() {
+  logIn(
+   {
+    email: document.getElementById("login-email").value,
+    password: document.getElementById("login-password").value,
+   },
+   (err) => {
+    alert(err.error);
+   },
+   (data) => {
+    localStorage.setItem("lxoxg", data.accessToken);
+    if (localStorage.getItem("lxoxg"))
+     setTimeout(() => (window.location.href = "/"), 100);
+   }
+  );
+ }
  return (
   <div className="flex justify-center items-center h-screen">
    <div className="w-full max-w-[400px]">
@@ -25,7 +42,9 @@ export default function Login() {
     </Link>
 
     <div className="mt-7">
-     <Button className="w-full">Sign In</Button>
+     <Button className="w-full" onClick={submit}>
+      Sign In
+     </Button>
     </div>
 
     <p className="text-[14px] text-center mt-4 text-gray-500">
