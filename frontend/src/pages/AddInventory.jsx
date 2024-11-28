@@ -10,10 +10,13 @@ import Select from "../components/Select";
 import { addInventory } from "../utils/API";
 import districts from "../utils/Districts.json";
 import divisions from "../utils/Divisions.json";
+import Loading from "../components/Loading";
 
 export default function AddInventory() {
  const navigate = useNavigate();
  function submit() {
+  document.getElementById("add-inventory-form").classList.add("hidden");
+  document.getElementById("loading").classList.remove("hidden");
   addInventory(
    {
     donor_name: document.getElementById("ani-name").value,
@@ -23,10 +26,11 @@ export default function AddInventory() {
      division: document.getElementById("ani-division").value,
      district: document.getElementById("ani-district").value,
     },
-    blood_group: document.querySelector('input[name="blood-group"]:checked')
-     .value,
+    blood_group:
+     document.querySelector('input[name="blood-group"]:checked')?.value || "",
    },
    (e) => {
+    document.getElementById("loading").classList.add("hidden");
     document.getElementById("error-message").classList.remove("hidden");
     document.getElementById("add-inventory-form").classList.add("hidden");
     document.getElementById("error-message-text").textContent = e.error
@@ -175,10 +179,16 @@ export default function AddInventory() {
     <p className="text-gray-600 text-center mt-2" id="error-message-text"></p>
     <Button
      className="!bg-transparent !text-black border-2 !px-6 rounded-xl !py-1.5 mt-8"
-     onClick={() => window.location.reload()}
+     onClick={() => {
+        document.getElementById("error-message").classList.add("hidden");
+        document.getElementById("add-inventory-form").classList.remove("hidden");
+     }}
     >
      Try Again
     </Button>
+   </div>
+   <div className="hidden flex justify-center mt-8" id="loading">
+    <Loading />
    </div>
   </Layout>
  );
