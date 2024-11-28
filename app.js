@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
 
-const userHandler = require("./controller/userHandler");
+const UserController = require("./controller/UserController");
+const PORT = process.env.PORT || 3000;
 
 /* express app initialization */
 const app = express();
@@ -13,7 +14,7 @@ app.use(express.static(path.join(__dirname, "frontend/dist")));
 app.use(
  cors({
   origin: "*",
-  methods: "GET,PUT,POST,DELETE",
+  methods: "GET,PUT,POST,DELETE,PATCH",
  })
 );
 dotenv.config();
@@ -25,7 +26,7 @@ mongoose
  .catch((err) => console.log(err));
 
 /* application routes */
-app.use("/api/user", userHandler);
+app.use("/api/user", UserController);
 app.get("*", (req, res) => {
  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });
@@ -35,11 +36,18 @@ app.use((err, req, res, next) => {
  if (req.headersSent) {
   return next(err);
  }
- res.status(500).json({
-  error: err || "Some error occurred!",
- });
+ if (process.env.NODE_ENV === "development") {
+  res.status(500).json({
+   error: err.message || err,
+   stack: err.stack || "",
+  });
+ } else {
+  res.status(500).json({
+   error: "Internal server error!",
+  });
+ }
 });
 
-app.listen(3000, () => {
- console.log("Listening on port 3000");
+app.listen(PORT, () => {
+ console.log(`Running on http://localhost:${PORT}`);
 });

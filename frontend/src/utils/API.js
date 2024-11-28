@@ -219,3 +219,53 @@ export const getUserData = async (error, callback) => {
    });
   });
 };
+
+export const forgotPassword = async (data, error, callback) => {
+ return await fetch("/api/user/forgot-password", {
+  method: "POST",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+  },
+  body: JSON.stringify(data),
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
+
+export const resetPassword = async (data, error, callback) => {
+ return await fetch(`/api/user/reset-password/${data.token}`, {
+  method: "PATCH",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+  },
+  body: JSON.stringify({
+   password: data.password,
+  }),
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
