@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "react-router";
+
 import Button from "../components/Button";
 import { Info } from "../components/Icons";
 import Input from "../components/Input";
 import Label from "../components/Label";
 import Layout from "../components/Layout";
 import Select from "../components/Select";
+
 import { addInventory } from "../utils/API";
+import districts from "../utils/Districts.json";
+import divisions from "../utils/Divisions.json";
 
 export default function AddInventory() {
  const navigate = useNavigate();
@@ -99,14 +103,12 @@ export default function AddInventory() {
        className="w-full mt-1 !py-3 !rounded-xl"
        required
       >
-       <option value="dhaka">Dhaka</option>
-       <option value="chittagong">Chittagong</option>
-       <option value="khulna">Khulna</option>
-       <option value="rajshahi">Rajshahi</option>
-       <option value="barisal">Barisal</option>
-       <option value="sylhet">Sylhet</option>
-       <option value="rangpur">Rangpur</option>
-       <option value="mymensingh">Mymensingh</option>
+       <option value=""></option>
+       {divisions.divisions.map((v) => (
+        <option key={v.id} value={v.name}>
+         {v.name}
+        </option>
+       ))}
       </Select>
      </div>
 
@@ -120,14 +122,12 @@ export default function AddInventory() {
        className="w-full mt-1 !py-3 !rounded-xl"
        required
       >
-       <option value="dhaka">Dhaka</option>
-       <option value="chittagong">Chittagong</option>
-       <option value="khulna">Khulna</option>
-       <option value="rajshahi">Rajshahi</option>
-       <option value="barisal">Barisal</option>
-       <option value="sylhet">Sylhet</option>
-       <option value="rangpur">Rangpur</option>
-       <option value="mymensingh">Mymensingh</option>
+       <option value=""></option>
+       {districts.districts.map((v) => (
+        <option key={v.id} value={v.name}>
+         {v.name}
+        </option>
+       ))}
       </Select>
      </div>
     </div>
