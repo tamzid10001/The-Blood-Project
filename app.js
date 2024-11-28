@@ -5,6 +5,7 @@ const path = require("path");
 const cors = require("cors");
 
 const UserController = require("./controller/UserController");
+const InventoryController = require("./controller/InventoryController");
 const PORT = process.env.PORT || 3000;
 
 /* express app initialization */
@@ -27,6 +28,7 @@ mongoose
 
 /* application routes */
 app.use("/api/user", UserController);
+app.use("/api/inventory", InventoryController);
 app.get("*", (req, res) => {
  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });

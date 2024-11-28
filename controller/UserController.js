@@ -20,7 +20,7 @@ router.get("/verify", checkLogin, async (req, res, next) => {
    data: {
     userId: req.userId,
     name: req.name,
-    bankName: req.bankName,
+    bank_name: req.bank_name,
     email: req.email,
    },
   });
@@ -47,7 +47,7 @@ router.post("/signup", async (req, res, next) => {
  if (req.body.name && req.body.password && req.body.email) {
   const newUser = new User({
    name: req.body.name,
-   bankName: req.body.bankName,
+   bank_name: req.body.bank_name,
    password: bcrypt.hashSync(req.body.password, 10),
    email: req.body.email,
    createdAt: Date.now(),

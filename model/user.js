@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
    },
   ],
  },
- bankName: {
+ bank_name: {
   type: String,
   required: true,
   validate: [

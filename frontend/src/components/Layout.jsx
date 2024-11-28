@@ -8,7 +8,7 @@ import Button from "./Button";
 export default function Layout(props) {
  const [open, setOpen] = useState(false);
  const [name, setName] = useState(null);
- const [bankName, setbankName] = useState(null);
+ const [bank_name, setbank_name] = useState(null);
  const [email, setEmail] = useState(null);
  let navigate = useNavigate();
 
@@ -25,10 +25,10 @@ export default function Layout(props) {
     },
     (o) => {
      window.localStorage.setItem("user-name", o.data.name);
-     window.localStorage.setItem("user-bankName", o.data.bankName);
+     window.localStorage.setItem("user-bank_name", o.data.bank_name);
      window.localStorage.setItem("user-email", o.data.email);
      setName(o.data.name);
-     setbankName(o.data.bankName);
+     setbank_name(o.data.bank_name);
      setEmail(o.data.email);
     }
    );
@@ -44,7 +44,7 @@ export default function Layout(props) {
       Welcome, {name?.split(" ").slice(-1)[0] || "User"} 👏🏻
      </h3>
      <p className="text-[16px] font-medium text-gray-400">
-      {bankName || "Unknown Blood Bank"}
+      {bank_name || "Unknown Blood Bank"}
      </p>
     </div>
     <div className="flex gap-2 justify-between">

@@ -9,7 +9,7 @@ export default function Signup() {
   signUp(
    {
     name: document.getElementById("signup-name").value,
-    bankName: document.getElementById("signup-bname").value,
+    bank_name: document.getElementById("signup-bname").value,
     email: document.getElementById("signup-email").value,
     password: document.getElementById("signup-password").value,
    },

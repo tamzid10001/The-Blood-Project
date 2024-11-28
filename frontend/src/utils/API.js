@@ -269,3 +269,84 @@ export const resetPassword = async (data, error, callback) => {
    });
   });
 };
+
+export const getInventoryByIndexes = async (from, to, error, callback) => {
+ return await fetch(`/api/inventory/byIndex`, {
+  method: "POST",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+  body: JSON.stringify({
+   from,
+   to,
+  }),
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
+
+export const getInventoryByDate = async (from, to, error, callback) => {
+ return await fetch(`/api/inventory/byDate`, {
+  method: "POST",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+  body: JSON.stringify({
+   from,
+   to,
+  }),
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
+
+export const addInventory = async (data, error, callback) => {
+ return await fetch(`/api/inventory/create`, {
+  method: "POST",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+  body: JSON.stringify(data),
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};

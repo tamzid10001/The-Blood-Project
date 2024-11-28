@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 
 const inventorySchema = mongoose.Schema(
  {
-  donorName: {
+  index: {
+   type: Number,
+   required: true,
+   unique: true,
+  },
+  donor_name: {
    type: String,
    required: true,
    validate: [
@@ -21,23 +26,15 @@ const inventorySchema = mongoose.Schema(
    ],
   },
   id: {
-   type: String,
+   type: Number,
    required: true,
    unique: true,
-   validate: [
-    {
-     validator: function (v) {
-      return /^[0-9]+$/.test(v);
-     },
-     message: "ID can only contain numbers!",
+   validate: {
+    validator: function (v) {
+     return v > 0;
     },
-    {
-     validator: function (v) {
-      return v.length > 2 && v.length < 20;
-     },
-     message: "ID must be longer than 2 and shorter than 20 characters!",
-    },
-   ],
+    message: "ID must be greater than 0!",
+   },
   },
   date: {
    type: Date,
@@ -81,9 +78,10 @@ const inventorySchema = mongoose.Schema(
     ],
    },
   },
-  bloodGroup: {
+  blood_group: {
    type: String,
    required: true,
+   enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
    validate: [
     {
      validator: function (v) {
@@ -100,26 +98,25 @@ const inventorySchema = mongoose.Schema(
     },
    ],
   },
-  quantity: {
+  bag_quantity: {
    type: Number,
    required: true,
-   validate: [
-    {
-     validator: function (v) {
-      return /^[0-9]+$/.test(v);
-     },
-     message: "Quantity can only contain numbers!",
+   validate: {
+    validator: function (v) {
+     return v > 0;
     },
-    {
-     validator: function (v) {
-      return v > 0;
-     },
-     message: "Quantity must be greater than 0!",
-    },
-   ],
+    message: "Quantity must be greater than 0!",
+   },
+  },
+  status: {
+   default: "pending",
+   type: String,
+   enum: ["pending", "received"],
   },
  },
  {
   timestamps: true,
  }
 );
+
+module.exports = inventorySchema;
