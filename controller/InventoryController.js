@@ -8,22 +8,13 @@ const inventorySchema = require("../model/inventory");
 /* Inventory model */
 const Inventory = mongoose.model("Inventory", inventorySchema);
 
-/* POST - inventory lists by index */
-router.post("/byIndex", checkLogin, async (req, res, next) => {
+/* GET - inventory lists */
+router.get("/", checkLogin, async (req, res, next) => {
  try {
-  const { from, to } = req.body;
   const data = await Inventory.find();
-  const specificData = await Inventory.find({
-   index: { $gte: from, $lte: to },
-  });
   res.status(200).json({
    message: "Successfully retrieved inventory lists!",
-   info: {
-    total: data.length,
-    from,
-    to,
-   },
-   data: specificData,
+   data,
   });
  } catch (err) {
   return next(err);
@@ -73,18 +64,38 @@ router.post("/create", checkLogin, async (req, res, next) => {
  }
 });
 
-/* UPDATE - mark status of inventory as sold */
-router.put("/mark-sold/:id", checkLogin, async (req, res, next) => {
+/* PUT - make is_sold true */
+router.put("/sold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
-  const data = await Inventory.findOneAndUpdate(
-   { id },
-   { is_sold: true },
-   { new: true }
+  const item = await Inventory.findOneAndUpdate(
+   { id: id },
+   { $set: { is_sold: true } }
   );
+  if (!item) {
+   return res.status(404).json({ message: "Inventory item not found" });
+  }
   res.status(200).json({
-   message: "Successfully marked inventory as sold!",
-   data,
+   message: "Successfully marked inventory as sold",
+  });
+ } catch (err) {
+  return next(err);
+ }
+});
+
+/* PUT - make is_sold false */
+router.put("/unsold/:id", checkLogin, async (req, res, next) => {
+ try {
+  const { id } = req.params;
+  const item = await Inventory.findOneAndUpdate(
+   { id: id },
+   { $set: { is_sold: false } }
+  );
+  if (!item) {
+   return res.status(404).json({ message: "Inventory item not found" });
+  }
+  res.status(200).json({
+   message: "Successfully marked inventory as unsold",
   });
  } catch (err) {
   return next(err);

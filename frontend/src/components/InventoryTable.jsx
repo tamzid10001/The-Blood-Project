@@ -1,7 +1,7 @@
 import {
+ changeIsSold,
  deleteInventory,
- getInventoryByIndexes,
- markInventoryAsSold,
+ getInventory
 } from "../utils/API";
 import { useEffect, useState } from "react";
 
@@ -9,30 +9,28 @@ import Button from "./Button";
 import { Delete } from "./Icons";
 import Loading from "./Loading";
 
-export default function InventoryTable({ from, to, setTotal }) {
+export default function InventoryTable() {
  const [data, setData] = useState(null);
  useEffect(() => {
-  getInventoryByIndexes(
-   from || 0,
-   to || 10,
-   (error) => {
-    console.log(error);
+  getInventory(
+   () => {
    },
    (v) => {
     setData(v.data);
-    setTotal(v.info.total);
    }
   );
- }, [from, to]);
- function markSold(id) {
+ }, []);
+ function markSold(id, status) {
   const cnfrm = confirm(
-   "Are you sure you want to mark this inventory as sold?"
+   `Are you sure you want to mark this inventory as ${
+    status ? "sold" : "unsold"
+   }?`
   );
   if (cnfrm) {
-   markInventoryAsSold(
+   changeIsSold(
     id,
-    (e) => {
-     console.log(e);
+    status,
+    () => {
     },
     () => {
      window.location.reload();
@@ -45,8 +43,7 @@ export default function InventoryTable({ from, to, setTotal }) {
   if (cnfrm) {
    deleteInventory(
     id,
-    (e) => {
-     console.log(e);
+    () => {
     },
     () => {
      window.location.reload();
@@ -102,7 +99,11 @@ export default function InventoryTable({ from, to, setTotal }) {
            className={`!text-[14px] font-bold rounded-full flex justify-center items-center gap-2 !py-1.5 ${
             i.is_sold ? "!bg-black !text-white" : ""
            }`}
-           onClick={!i.is_sold ? () => markSold(i.id) : () => {}}
+           onClick={
+            !i.is_sold
+             ? () => markSold(i.id, true)
+             : () => markSold(i.id, false)
+           }
           >
            {i.is_sold ? "Sold" : "Mark Sold"}
           </Button>

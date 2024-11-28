@@ -26,15 +26,9 @@ const inventorySchema = mongoose.Schema(
    ],
   },
   id: {
-   type: Number,
+   type: String || Number,
    required: true,
    unique: true,
-   validate: {
-    validator: function (v) {
-     return v > 0;
-    },
-    message: "ID must be greater than 0!",
-   },
   },
   date: {
    type: Date,

@@ -11,10 +11,16 @@ import { addInventory } from "../utils/API";
 import districts from "../utils/Districts.json";
 import divisions from "../utils/Divisions.json";
 import Loading from "../components/Loading";
+import { useState } from "react";
 
 export default function AddInventory() {
  const navigate = useNavigate();
+ const [bgrErr, setBgrErr] = useState(false);
+
  function submit() {
+  if (!document.querySelector('input[name="blood-group"]:checked')) {
+   return setBgrErr(true);
+  }
   document.getElementById("add-inventory-form").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
   addInventory(
@@ -43,6 +49,7 @@ export default function AddInventory() {
    }
   );
  }
+
  return (
   <Layout>
    <form
@@ -77,10 +84,10 @@ export default function AddInventory() {
       ID
      </Label>
      <Input
-      type="number"
+      type="text"
       id="ani-id"
       className="w-full mt-1 !py-3 !rounded-xl"
-      placeholder="#"
+      placeholder=""
       required
      />
     </div>
@@ -138,7 +145,11 @@ export default function AddInventory() {
 
     <div>
      <p className="text-gray-400 text-[14px] mt-6">Blood Group</p>
-     <ul className="grid w-full gap-4 md:grid-cols-8 mt-2.5 sm:grid-cols-4 grid-cols-3">
+     <ul
+      className={`grid w-full gap-4 md:grid-cols-8 mt-2.5 sm:grid-cols-4 grid-cols-3 ${
+       bgrErr ? "border-primary border-2" : ""
+      }`}
+     >
       {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((v, i) => (
        <li key={i}>
         <input
@@ -147,6 +158,7 @@ export default function AddInventory() {
          name="blood-group"
          value={v}
          className="hidden peer"
+         onChange={() => setBgrErr(false)}
         />
         <label
          htmlFor={"bloodgroup-" + v}
@@ -180,8 +192,8 @@ export default function AddInventory() {
     <Button
      className="!bg-transparent !text-black border-2 !px-6 rounded-xl !py-1.5 mt-8"
      onClick={() => {
-        document.getElementById("error-message").classList.add("hidden");
-        document.getElementById("add-inventory-form").classList.remove("hidden");
+      document.getElementById("error-message").classList.add("hidden");
+      document.getElementById("add-inventory-form").classList.remove("hidden");
      }}
     >
      Try Again

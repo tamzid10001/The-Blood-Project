@@ -270,18 +270,14 @@ export const resetPassword = async (data, error, callback) => {
   });
 };
 
-export const getInventoryByIndexes = async (from, to, error, callback) => {
- return await fetch(`/api/inventory/byIndex`, {
-  method: "POST",
+export const getInventory = async (error, callback) => {
+ return await fetch("/api/inventory", {
+  method: "GET",
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
    Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
-  body: JSON.stringify({
-   from,
-   to,
-  }),
  })
   .then((res) => res.json())
   .then((data) => {
@@ -351,8 +347,8 @@ export const addInventory = async (data, error, callback) => {
   });
 };
 
-export const markInventoryAsSold = async (id, error, callback) => {
- return await fetch(`/api/inventory/mark-sold/${id}`, {
+export const changeIsSold = async (id, status, error, callback) => {
+ return await fetch(`/api/inventory/${status ? "" : "un"}sold/${id}`, {
   method: "PUT",
   headers: {
    "Content-Type": "application/json",

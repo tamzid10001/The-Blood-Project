@@ -43,14 +43,15 @@ export default function Dashboard() {
  ]);
  useEffect(() => {
   getQuantityByBloodGroup(
-   (e) => {
-    console.log(e);
+   () => {
    },
    (v) => {
     const newGroupData = [...groupData];
     for (let i = 0; i < groupData.length; i++) {
-     if (v.data[i]) {
-      newGroupData[i].total = v.data[i].total;
+     for (let j = 0; j < v.data.length; j++) {
+      if (groupData[i]._id === v.data[j]._id) {
+       newGroupData[i].total = v.data[j].total;
+      }
      }
     }
     setGroupData(newGroupData);
