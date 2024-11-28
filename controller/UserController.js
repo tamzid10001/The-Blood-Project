@@ -34,7 +34,7 @@ router.get("/", checkLogin, async (req, res, next) => {
  try {
   const data = await User.findOne({ _id: req.userId }).select("-password");
   res.status(200).json({
-   message: "User was fetched successfully!",
+   message: "Successfully retrieved user!",
    data,
   });
  } catch (err) {
@@ -56,7 +56,7 @@ router.post("/signup", async (req, res, next) => {
   try {
    const data = await newUser.save();
    res.status(201).json({
-    message: "User was created successfully!",
+    message: "Successfully created a new user!",
     data,
    });
   } catch (err) {
@@ -95,7 +95,7 @@ router.post("/login", async (req, res, next) => {
      }
     );
     res.status(200).json({
-     message: "User was logged in successfully!",
+     message: "Successfully logged in!",
      accessToken: token,
     });
    } else {
@@ -129,7 +129,7 @@ router.put("/:id", checkLogin, async (req, res, next) => {
    }
   );
   res.status(200).json({
-   message: "User was updated successfully!",
+   message: "Successfully updated user!",
    data: updatedUser,
   });
  } catch (err) {
@@ -142,7 +142,7 @@ router.delete("/:id", checkLogin, async (req, res, next) => {
  try {
   await User.deleteOne({ _id: req.params.id });
   res.status(200).json({
-   message: "User was deleted successfully!",
+   message: "Successfully deleted user!",
   });
  } catch (err) {
   return next(err);
@@ -168,7 +168,7 @@ router.post("/forgot-password", async (req, res, next) => {
     `We have recieved a pasword reset request. Please use the link below to reset your password: \n\n${resetUrl}\n\nThis link will expire in 10 minutes.`
    );
    res.status(200).json({
-    message: "Password reset token was sent successfully!",
+    message: "Successfully sent password reset email!",
    });
   } catch (e) {
    user.passwordResetToken = undefined;
@@ -210,7 +210,7 @@ router.patch("/reset-password/:token", async (req, res, next) => {
  await user.save();
 
  res.status(200).json({
-  message: "Password was reset successfully!",
+  message: "Successfully reset password!",
  });
 });
 

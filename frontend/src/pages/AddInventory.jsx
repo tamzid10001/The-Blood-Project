@@ -42,7 +42,7 @@ export default function AddInventory() {
      <Label htmlFor="ani-division" className="text-gray-400">
       Division
      </Label>
-     <Select type="text" id="ani-division" className="w-full mt-1 !py-3 !rounded-xl">
+     <Select id="ani-division" className="w-full mt-1 !py-3 !rounded-xl">
       <option value="dhaka">Dhaka</option>
       <option value="chittagong">Chittagong</option>
       <option value="khulna">Khulna</option>

@@ -61,12 +61,12 @@ const userSchema = mongoose.Schema({
   type: String,
   required: true,
  },
- /*iventories: [
+ iventory: [
   {
    type: mongoose.Schema.Types.ObjectId,
    ref: "Inventory",
   },
- ],*/
+ ],
  createdAt: {
   type: Date,
   default: Date.now,

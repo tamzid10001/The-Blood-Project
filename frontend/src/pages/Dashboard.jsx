@@ -44,7 +44,7 @@ export default function Dashboard() {
     ].map((item, index) => (
      <div
       key={index}
-      className="bg-gray-50 rounded-md border-2 border-primary px-6 py-5"
+      className="bg-gray-50 rounded-md border-2 border-primary px-6 py-5 hover:shadow-lg hover:border-gray-600 transition-all"
      >
       <div>
        <h3 className="text-lg font-semibold px-2 py-0.5 bg-primary rounded-xl text-white w-fit !text-[14px] font-bold">
