@@ -49,7 +49,7 @@ router.post("/create", checkLogin, async (req, res, next) => {
   const { donor_name, id, date, address, blood_group } = req.body;
   const data = await Inventory.create({
    donor_name,
-   id,
+   id: id.trim(),
    date,
    address,
    blood_group,
@@ -69,7 +69,7 @@ router.put("/sold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
   const item = await Inventory.findOneAndUpdate(
-   { id: id },
+   { id: id.trim() },
    { $set: { is_sold: true } }
   );
   if (!item) {
@@ -88,7 +88,7 @@ router.put("/unsold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
   const item = await Inventory.findOneAndUpdate(
-   { id: id },
+   { id: id.trim() },
    { $set: { is_sold: false } }
   );
   if (!item) {
@@ -106,7 +106,7 @@ router.put("/unsold/:id", checkLogin, async (req, res, next) => {
 router.delete("/delete/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
-  await Inventory.findOneAndDelete({ id });
+  await Inventory.findOneAndDelete({ id: id.trim() });
   res.status(200).json({
    message: "Successfully deleted inventory!",
   });
