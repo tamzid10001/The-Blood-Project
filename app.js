@@ -8,6 +8,24 @@ const UserController = require("./controller/UserController");
 const InventoryController = require("./controller/InventoryController");
 const PORT = process.env.PORT || 3000;
 
+const buildFrontend = () => {
+    console.log('Building frontend...');
+    return new Promise((resolve, reject) => {
+      exec('cd frontend && npm install && npm run build', (error, stdout, stderr) => {
+        if (error) {
+          console.error('Error building frontend:', stderr);
+          reject(stderr);
+        } else {
+          console.log('Frontend built successfully:', stdout);
+          resolve(stdout);
+        }
+      });
+    });
+  };
+  
+  // Serve the frontend after building
+  buildFrontend()
+    .then(() => {
 /* express app initialization */
 const app = express();
 app.use(express.json());
@@ -53,3 +71,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
  console.log(`Running on http://localhost:${PORT}`);
 });
+
+    })
