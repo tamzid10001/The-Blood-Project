@@ -43,11 +43,7 @@ export default function Layout(props) {
    <nav className="pb-9 flex flex-col lg:flex-row gap-4 lg:justify-between lg:items-center">
     <div>
      <h3 className="text-2xl font-semibold">
-      Welcome,{" "}
-      {name ||
-       window.localStorage.getItem("user-name")?.split(" ").slice(-1)[0] ||
-       "User"}{" "}
-      👏🏻
+      Welcome, {name?.split(" ").slice(-1)[0] || "User"} 👏🏻
      </h3>
      <p className="text-[16px] font-medium text-gray-400">
       Kushtia GH Blood Bank
@@ -56,7 +52,7 @@ export default function Layout(props) {
     <div className="flex gap-2 justify-between">
      <Button
       className={`lg:hidden !text-[16px] font-bold rounded-full !py-1 !px-2.5 !bg-transparent border-2 ${
-       open ? "!text-black !bg-black/5" : "!text-primary"
+       open ? "!text-black" : "!text-primary"
       }`}
       onClick={() => setOpen(!open)}
      >
@@ -79,7 +75,7 @@ export default function Layout(props) {
     <aside
      className={`fixed z-40 ${
       !open && "left-[-1000px]"
-     } px-10 lg:ps-0 bg-white lg:sticky lg:top-0 left-0 w-full h-[72vh] lg:max-w-[245px]`}
+     } px-10 lg:ps-0 bg-white lg:sticky lg:top-0 left-0 w-full h-[72vh] lg:max-w-[245px] overflow-y-auto`}
     >
      <div>
       <hr className="mb-4 border-t-2" />
@@ -127,14 +123,8 @@ export default function Layout(props) {
       <hr className="my-4 border-t-2" />
       <div className="w-full flex justify-between py-3">
        <div className="hover:opacity-70 cursor-pointer active:scale-95">
-        <h3 className="text-[14px] font-semibold">
-         {name || window.localStorage.getItem("user-name") || "Unknown"}
-        </h3>
-        <p className="text-[12px] text-gray-400">
-         {email ||
-          window.localStorage.getItem("user-email") ||
-          "error occurred"}
-        </p>
+        <h3 className="text-[14px] font-semibold">{name || "Unknown"}</h3>
+        <p className="text-[12px] text-gray-400">{email || "error occurred"}</p>
        </div>
        <button
         onClick={() => {
@@ -150,8 +140,8 @@ export default function Layout(props) {
        </button>
       </div>
      </div>
-     <div className="fixed bottom-[40px]">
-      <p className="text-gray-400 text-[16px]">
+     <div className="md:fixed bottom-[40px]">
+      <p className="text-gray-400 text-[16px] mt-8">
        &copy; The Blood Project | 2025
       </p>
      </div>

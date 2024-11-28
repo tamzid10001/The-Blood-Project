@@ -15,7 +15,7 @@ export default function Inventory() {
    </div>
    <hr className="border-t-2 mt-4" />
    <InventoryTable />
-   <div className="mt-6 flex justify-between">
+   <div className="mt-6 flex justify-between gap-4 flex-col md:flex-row">
     <div>
      <p className="text-[16px] text-gray-400">Showing Results 10 of 180</p>
     </div>
