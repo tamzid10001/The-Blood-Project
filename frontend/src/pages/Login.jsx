@@ -37,7 +37,7 @@ export default function Login() {
      <Input type="password" id="login-password" className="w-full mt-1" />
     </div>
 
-    <Link to="/reset-password" className="text-[14px] text-primary block mt-3">
+    <Link to="/forgot-password" className="text-[14px] text-primary block mt-3">
      Forgot Password?
     </Link>
 

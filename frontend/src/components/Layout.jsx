@@ -7,7 +7,8 @@ import Button from "./Button";
 
 export default function Layout(props) {
  const [open, setOpen] = useState(false);
- const [user, setUser] = useState({});
+ const [name, setName] = useState(null);
+ const [email, setEmail] = useState(null);
  let navigate = useNavigate();
 
  useEffect(() => {
@@ -17,28 +18,36 @@ export default function Layout(props) {
   });
 
   if (window.localStorage.getItem("lxoxg")) {
-   verifyToken(() => {
-    return navigate("/login");
-   });
+   verifyToken(
+    () => {
+     return navigate("/login");
+    },
+    () => {
+     getUserData(
+      () => {},
+      (o) => {
+       window.localStorage.setItem("user-name", o.data.name);
+       window.localStorage.setItem("user-email", o.data.email);
+       setName(o.data.name);
+       setEmail(o.data.email);
+      }
+     );
+    }
+   );
   } else {
    return navigate("/login");
   }
-
-  getUserData(
-   (err) => {
-    alert(err.error);
-   },
-   (data) => {
-    setUser(data.data);
-   }
-  );
  }, []);
  return (
   <div className="p-9">
    <nav className="pb-9 flex flex-col lg:flex-row gap-4 lg:justify-between lg:items-center">
     <div>
      <h3 className="text-2xl font-semibold">
-      Welcome, {user?.name?.split(" ").slice(-1)[0] || "User"} 👏🏻
+      Welcome,{" "}
+      {name ||
+       window.localStorage.getItem("user-name")?.split(" ").slice(-1)[0] ||
+       "User"}{" "}
+      👏🏻
      </h3>
      <p className="text-[16px] font-medium text-gray-400">
       Kushtia GH Blood Bank
@@ -118,16 +127,27 @@ export default function Layout(props) {
       <hr className="my-4 border-t-2" />
       <div className="w-full flex justify-between py-3">
        <div className="hover:opacity-70 cursor-pointer active:scale-95">
-        <h3 className="text-[14px] font-semibold">{user.name || "Unknown"}</h3>
+        <h3 className="text-[14px] font-semibold">
+         {name || window.localStorage.getItem("user-name") || "Unknown"}
+        </h3>
         <p className="text-[12px] text-gray-400">
-         {user.email || "error occurred"}
+         {email ||
+          window.localStorage.getItem("user-email") ||
+          "error occurred"}
         </p>
        </div>
-       <Link to="/login">
+       <button
+        onClick={() => {
+         localStorage.removeItem("lxoxg");
+         localStorage.removeItem("user.name");
+         localStorage.removeItem("user.email");
+         window.location.href = "/";
+        }}
+       >
         <p className="w-fit cursor-pointer active:scale-95 select-none text-[12px] text-primary mt-2">
          Logout
         </p>
-       </Link>
+       </button>
       </div>
      </div>
      <div className="fixed bottom-[40px]">

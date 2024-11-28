@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Inventory from "./pages/Inventory";
 import AddInventory from "./pages/AddInventory";
 import Settings from "./pages/Settings";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
  return (
@@ -13,6 +14,7 @@ function App() {
    <Routes>
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
     <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="/" element={<Dashboard />} />
     <Route path="/inventory" element={<Inventory />} />
