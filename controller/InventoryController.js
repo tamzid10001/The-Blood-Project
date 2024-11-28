@@ -104,4 +104,24 @@ router.delete("/delete/:id", checkLogin, async (req, res, next) => {
  }
 });
 
+/* GET - get quantity by blood group */
+router.get("/quantity", checkLogin, async (req, res, next) => {
+ try {
+  const data = await Inventory.aggregate([
+   {
+    $group: {
+     _id: "$blood_group",
+     total: { $sum: 1 },
+    },
+   },
+  ]);
+  res.status(200).json({
+   message: "Successfully retrieved quantity by blood group!",
+   data,
+  });
+ } catch (err) {
+  return next(err);
+ }
+});
+
 module.exports = router;

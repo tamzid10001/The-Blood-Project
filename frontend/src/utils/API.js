@@ -398,3 +398,27 @@ export const deleteInventory = async (id, error, callback) => {
    });
   });
 };
+
+export const getQuantityByBloodGroup = async (error, callback) => {
+ return await fetch(`/api/inventory/quantity`, {
+  method: "GET",
+  headers: {
+   "Content-Type": "application/json",
+   "Access-Control-Allow-Origin": "*",
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
+  },
+ })
+  .then((res) => res.json())
+  .then((data) => {
+   if (data.error) {
+    error(data);
+   } else {
+    callback(data);
+   }
+  })
+  .catch((err) => {
+   error({
+    error: err.message,
+   });
+  });
+};
