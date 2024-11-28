@@ -74,7 +74,7 @@ export default function ResetPassword() {
     </div>
    </div>
 
-   <div id="error-box" className="w-full max-w-[400px] hidden">
+   <div id="error-box" className="w-full max-w-[400px] hidden text-center">
     <h1 className="text-2xl lg:text-3xl font-medium">Error!</h1>
     <p className="text-[14px] text-gray-500 mt-3" id="error-message"></p>
     <button
