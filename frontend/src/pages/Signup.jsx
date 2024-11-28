@@ -9,6 +9,7 @@ export default function Signup() {
   signUp(
    {
     name: document.getElementById("signup-name").value,
+    bankName: document.getElementById("signup-bname").value,
     email: document.getElementById("signup-email").value,
     password: document.getElementById("signup-password").value,
    },
@@ -16,37 +17,55 @@ export default function Signup() {
     alert(err.error);
    },
    (data) => {
-    localStorage.setItem("lxoxg", data.accessToken);
+    localStorage.setItem("LlkhJHKGheft", data.accessToken);
     window.location.href = "/";
    }
   );
  }
  return (
   <div className="flex justify-center items-center h-screen">
-   <div className="w-full max-w-[400px]">
+   <form
+    onSubmit={(e) => {
+     e.preventDefault();
+     submit();
+    }}
+    className="w-full max-w-[400px]"
+   >
     <h1 className="text-2xl lg:text-3xl font-medium">Sign-up</h1>
 
     <div className="mt-6">
      <Label for="signup-name" className="mb-5">
       Name
      </Label>
-     <Input type="text" id="signup-name" className="w-full mt-1" />
+     <Input type="text" id="signup-name" className="w-full mt-1" required />
+    </div>
+
+    <div className="mt-6">
+     <Label for="signup-bname" className="mb-5">
+      Blood Bank Name
+     </Label>
+     <Input type="text" id="signup-bname" className="w-full mt-1" required />
     </div>
 
     <div className="mt-3">
      <Label for="signup-email" className="mb-5">
       Email
      </Label>
-     <Input type="email" id="signup-email" className="w-full mt-1" />
+     <Input type="email" id="signup-email" className="w-full mt-1" required />
     </div>
 
     <div className="mt-3">
      <Label for="signup-password">Password</Label>
-     <Input type="password" id="signup-password" className="w-full mt-1" />
+     <Input
+      type="password"
+      id="signup-password"
+      className="w-full mt-1"
+      required
+     />
     </div>
 
     <div className="mt-7">
-     <Button className="w-full" onClick={submit}>
+     <Button type="submit" className="w-full">
       Create account
      </Button>
     </div>
@@ -56,7 +75,7 @@ export default function Signup() {
       Sign in
      </Link>
     </p>
-   </div>
+   </form>
   </div>
  );
 }

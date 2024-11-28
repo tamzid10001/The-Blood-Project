@@ -20,26 +20,21 @@ export default function AddInventory() {
     <Label htmlFor="ani-name" className="text-gray-400">
      Donor Name
     </Label>
-    <Input type="text" id="ani-name" className="w-full mt-1" />
+    <Input type="text" id="ani-name" className="w-full mt-1 !py-3 !rounded-xl" />
    </div>
 
    <div className="mt-4">
     <Label htmlFor="ani-id" className="text-gray-400">
      ID
     </Label>
-    <Input
-     type="number"
-     id="ani-id"
-     className="w-full mt-1"
-     placeholder="#"
-    />
+    <Input type="number" id="ani-id" className="w-full mt-1 !py-3 !rounded-xl" placeholder="#" />
    </div>
 
    <div className="mt-4">
     <Label htmlFor="ani-date" className="text-gray-400">
      Date
     </Label>
-    <Input type="date" id="ani-date" className="w-full mt-1" />
+    <Input type="date" id="ani-date" className="w-full mt-1 !py-3 !rounded-xl" />
    </div>
 
    <div className="mt-4 grid grid-cols-2 gap-5 w-full">
@@ -47,7 +42,7 @@ export default function AddInventory() {
      <Label htmlFor="ani-division" className="text-gray-400">
       Division
      </Label>
-     <Select type="text" id="ani-division" className="w-full mt-1">
+     <Select type="text" id="ani-division" className="w-full mt-1 !py-3 !rounded-xl">
       <option value="dhaka">Dhaka</option>
       <option value="chittagong">Chittagong</option>
       <option value="khulna">Khulna</option>
@@ -63,7 +58,7 @@ export default function AddInventory() {
      <Label htmlFor="ani-district" className="text-gray-400">
       District
      </Label>
-     <Select type="text" id="ani-district" className="w-full mt-1">
+     <Select type="text" id="ani-district" className="w-full mt-1 !py-3 !rounded-xl">
       <option value="dhaka">Dhaka</option>
       <option value="chittagong">Chittagong</option>
       <option value="khulna">Khulna</option>
@@ -104,11 +99,11 @@ export default function AddInventory() {
 
    <div className="flex gap-4">
     <Link to="/">
-     <Button className="!bg-transparent !text-black border-2 rounded-lg py-1.5">
+     <Button className="!bg-transparent !text-black border-2 !px-6 rounded-xl !py-1.5">
       Cancel
      </Button>
     </Link>
-    <Button className="rounded-lg py-1.5">Add Blood</Button>
+    <Button className="rounded-xl !px-6 !py-1.5">Add Blood</Button>
    </div>
   </Layout>
  );

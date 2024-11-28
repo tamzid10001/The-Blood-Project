@@ -3,10 +3,9 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 
-const checkLogin = require("../middlewares/checkLogin");
-const userSchema = require("../schema/userSchema");
+const checkLogin = require("./middlewares/checkLogin");
+const userSchema = require("../model/user");
 
 /* User model */
 const User = mongoose.model("User", userSchema);
@@ -16,6 +15,12 @@ router.get("/verify", checkLogin, async (req, res) => {
  try {
   res.status(200).json({
    message: "Successfully logged in!",
+   data: {
+    userId: req.userId,
+    name: req.name,
+    bankName: req.bankName,
+    email: req.email,
+   },
   });
  } catch (err) {
   res.status(500).json({
@@ -44,6 +49,7 @@ router.post("/signup", async (req, res) => {
  if (req.body.name && req.body.password && req.body.email) {
   const newUser = new User({
    name: req.body.name,
+   bankName: req.body.bankName,
    password: bcrypt.hashSync(req.body.password, 10),
    email: req.body.email,
    createdAt: Date.now(),

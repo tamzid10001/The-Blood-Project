@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getUserData, verifyToken } from "../utils/API";
+import { verifyToken } from "../utils/API";
 
 import { Add, AddInventory, Home, Inventory, Menu } from "./Icons";
 import Button from "./Button";
@@ -8,6 +8,7 @@ import Button from "./Button";
 export default function Layout(props) {
  const [open, setOpen] = useState(false);
  const [name, setName] = useState(null);
+ const [bankName, setbankName] = useState(null);
  const [email, setEmail] = useState(null);
  let navigate = useNavigate();
 
@@ -17,21 +18,18 @@ export default function Layout(props) {
    behavior: "smooth",
   });
 
-  if (window.localStorage.getItem("lxoxg")) {
+  if (window.localStorage.getItem("LlkhJHKGheft")) {
    verifyToken(
     () => {
      return navigate("/login");
     },
-    () => {
-     getUserData(
-      () => {},
-      (o) => {
-       window.localStorage.setItem("user-name", o.data.name);
-       window.localStorage.setItem("user-email", o.data.email);
-       setName(o.data.name);
-       setEmail(o.data.email);
-      }
-     );
+    (o) => {
+     window.localStorage.setItem("user-name", o.data.name);
+     window.localStorage.setItem("user-bankName", o.data.bankName);
+     window.localStorage.setItem("user-email", o.data.email);
+     setName(o.data.name);
+     setbankName(o.data.bankName);
+     setEmail(o.data.email);
     }
    );
   } else {
@@ -46,7 +44,7 @@ export default function Layout(props) {
       Welcome, {name?.split(" ").slice(-1)[0] || "User"} 👏🏻
      </h3>
      <p className="text-[16px] font-medium text-gray-400">
-      Kushtia GH Blood Bank
+      {bankName || "Unknown Blood Bank"}
      </p>
     </div>
     <div className="flex gap-2 justify-between">
@@ -101,7 +99,7 @@ export default function Layout(props) {
         <Link
          key={index}
          to={item.link}
-         className={`flex gap-3 items-center p-2 text-[14px] rounded-lg cursor-pointer ${
+         className={`flex gap-3 items-center p-2 text-[14px] rounded-xl cursor-pointer ${
           window.location.pathname === item.link
            ? "text-black font-semibold bg-gray-100"
            : "text-gray-400"
@@ -110,7 +108,7 @@ export default function Layout(props) {
          <div
           className={`p-1 ${
            window.location.pathname === item.link
-            ? "fill-white rounded-lg bg-primary"
+            ? "fill-white rounded-xl bg-primary"
             : "fill-gray-400"
           }`}
          >
@@ -128,7 +126,7 @@ export default function Layout(props) {
        </div>
        <button
         onClick={() => {
-         localStorage.removeItem("lxoxg");
+         localStorage.removeItem("LlkhJHKGheft");
          localStorage.removeItem("user.name");
          localStorage.removeItem("user.email");
          window.location.href = "/";

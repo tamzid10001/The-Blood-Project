@@ -19,6 +19,24 @@ const userSchema = mongoose.Schema({
    },
   ],
  },
+ bankName: {
+  type: String,
+  required: true,
+  validate: [
+   {
+    validator: function (v) {
+     return /^[a-zA-Z ]+$/.test(v);
+    },
+    message: "Bank name can only contain letters and spaces!",
+   },
+   {
+    validator: function (v) {
+     return v.length > 2 && v.length < 30;
+    },
+    message: "Bank name must be longer than 2 and shorter than 30 characters!",
+   },
+  ],
+ },
  email: {
   type: String,
   required: true,
@@ -42,12 +60,12 @@ const userSchema = mongoose.Schema({
   type: String,
   required: true,
  },
- todos: [
+ /*iventories: [
   {
    type: mongoose.Schema.Types.ObjectId,
-   ref: "Todo",
+   ref: "Inventory",
   },
- ],
+ ],*/
  createdAt: {
   type: Date,
   default: Date.now,

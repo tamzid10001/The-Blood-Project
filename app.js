@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
 
-const userHandler = require("./handlers/userHandler");
+const userHandler = require("./controller/userHandler");
 
 /* express app initialization */
 const app = express();

@@ -20,9 +20,21 @@ export default function Inventory() {
      <p className="text-[16px] text-gray-400">Showing Results 10 of 180</p>
     </div>
     <div className="flex gap-2 items-center">
-        <Button className="!text-[16px] font-semibold !text-primary !bg-transparent border-2 !rounded-full !py-1 !px-2.5">&lt;</Button>
-        <div><Input type="text" value="10" disabled className="!border-2 !rounded-lg !py-1.5 !px-4 !w-[60px] px-0 !font-medium !text-primary !bg-transparent" /> <span className="text-gray-400">of</span> 180</div>
-        <Button className="!text-[16px] font-semibold !text-primary !bg-transparent border-2 !rounded-full !py-1 !px-2.5">&gt;</Button>
+     <Button className="!text-[16px] font-semibold !text-primary !bg-transparent border-2 !rounded-full !py-1 !px-2.5">
+      &lt;
+     </Button>
+     <div>
+      <Input
+       type="text"
+       value="10"
+       disabled
+       className="!border-2 !rounded-xl !py-1.5 !px-4 !w-[60px] px-0 !font-medium !text-primary !bg-transparent"
+      />{" "}
+      <span className="text-gray-400">of</span> 180
+     </div>
+     <Button className="!text-[16px] font-semibold !text-primary !bg-transparent border-2 !rounded-full !py-1 !px-2.5">
+      &gt;
+     </Button>
     </div>
    </div>
   </Layout>

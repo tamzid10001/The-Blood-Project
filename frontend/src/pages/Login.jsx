@@ -15,26 +15,37 @@ export default function Login() {
     alert(err.error);
    },
    (data) => {
-    localStorage.setItem("lxoxg", data.accessToken);
-    if (localStorage.getItem("lxoxg"))
+    localStorage.setItem("LlkhJHKGheft", data.accessToken);
+    if (localStorage.getItem("LlkhJHKGheft"))
      setTimeout(() => (window.location.href = "/"), 100);
    }
   );
  }
  return (
   <div className="flex justify-center items-center h-screen">
-   <div className="w-full max-w-[400px]">
+   <form
+    onSubmit={(e) => {
+     e.preventDefault();
+     submit();
+    }}
+    className="w-full max-w-[400px]"
+   >
     <h1 className="text-2xl lg:text-3xl font-medium">Login</h1>
     <div className="mt-6">
      <Label for="login-email" className="mb-5">
       Email
      </Label>
-     <Input type="email" id="login-email" className="w-full mt-1" />
+     <Input type="email" id="login-email" className="w-full mt-1" required />
     </div>
 
     <div className="mt-3">
      <Label for="login-password">Password</Label>
-     <Input type="password" id="login-password" className="w-full mt-1" />
+     <Input
+      type="password"
+      id="login-password"
+      className="w-full mt-1"
+      required
+     />
     </div>
 
     <Link to="/forgot-password" className="text-[14px] text-primary block mt-3">
@@ -42,7 +53,7 @@ export default function Login() {
     </Link>
 
     <div className="mt-7">
-     <Button className="w-full" onClick={submit}>
+     <Button type="submit" className="w-full">
       Sign In
      </Button>
     </div>
@@ -53,7 +64,7 @@ export default function Login() {
       Sign up now
      </Link>
     </p>
-   </div>
+   </form>
   </div>
  );
 }

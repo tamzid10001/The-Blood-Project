@@ -4,7 +4,7 @@ export const getTodos = async (error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
  })
   .then((res) => res.json())
@@ -28,7 +28,7 @@ export const addTodo = async (data, error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
   body: JSON.stringify(data),
  })
@@ -53,7 +53,7 @@ export const deleteTodo = async (id, error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
  })
   .then((res) => res.json())
@@ -77,7 +77,7 @@ export const updateTodo = async (id, data, error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
   body: JSON.stringify(data),
  })
@@ -102,7 +102,7 @@ export const changeTodoStatus = async (id, status, error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
   body: JSON.stringify({ status }),
  })
@@ -135,7 +135,7 @@ export const signUp = async (data, error, callback) => {
    if (data.error) {
     error(data);
    } else {
-    localStorage.setItem("lxoxg", data.accessToken);
+    localStorage.setItem("LlkhJHKGheft", data.accessToken);
     callback(data);
    }
   })
@@ -152,7 +152,7 @@ export const logIn = async (data, error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: "Bearer " + localStorage.getItem("lxoxg"),
+   Authorization: "Bearer " + localStorage.getItem("LlkhJHKGheft"),
   },
   body: JSON.stringify(data),
  })
@@ -161,7 +161,7 @@ export const logIn = async (data, error, callback) => {
    if (data.error) {
     error(data);
    } else {
-    localStorage.setItem("lxoxg", data.accessToken);
+    localStorage.setItem("LlkhJHKGheft", data.accessToken);
     callback(data);
    }
   })
@@ -178,7 +178,7 @@ export const verifyToken = async (error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
  })
   .then((res) => res.json())
@@ -202,7 +202,7 @@ export const getUserData = async (error, callback) => {
   headers: {
    "Content-Type": "application/json",
    "Access-Control-Allow-Origin": "*",
-   Authorization: `Bearer ${localStorage.getItem("lxoxg")}`,
+   Authorization: `Bearer ${localStorage.getItem("LlkhJHKGheft")}`,
   },
  })
   .then((res) => res.json())
