@@ -8,6 +8,13 @@ const UserController = require("./controllers/UserController");
 const InventoryController = require("./controllers/InventoryController");
 const PORT = process.env.PORT || 3000;
 
+/* Load environment variables */
+if (process.env.NODE_ENV === "development") {
+ dotenv.config({ path: path.resolve(__dirname, ".env.local") });
+} else {
+ dotenv.config();
+}
+
 /* express app initialization */
 const app = express();
 app.use(express.json());
@@ -17,7 +24,6 @@ app.use(
   origin: "*",
  })
 );
-dotenv.config();
 
 /* database connection */
 mongoose
@@ -49,7 +55,11 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
- console.log(`Running on http://localhost:${PORT}`);
+ console.log(
+  `Running on http://localhost:${PORT} - ${
+   process.env.NODE_ENV || "production"
+  } mode`
+ );
 });
 
 module.exports = app;

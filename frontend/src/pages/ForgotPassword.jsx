@@ -29,69 +29,76 @@ export default function ForgotPassword() {
   );
  };
  return (
-  <div className="flex justify-center items-center h-screen">
-   <form
-    onSubmit={(e) => {
-     e.preventDefault();
-     submit();
-    }}
-    id="input-box"
-    className="w-full max-w-[400px]"
-   >
-    <h1 className="text-2xl lg:text-3xl font-medium">Lookup your profile</h1>
-    <div className="mt-6">
-     <Input
-      type="email"
-      id="passrst-email"
-      placeholder="Enter Email"
-      required
-      className="w-full mt-1 bg-gray-50"
-     />
-    </div>
-
-    <div className="mt-4">
-     <Button className="w-full" type="submit">
-      Reset Password
-     </Button>
-    </div>
-
-    <p className="text-[14px] text-center mt-6 text-gray-500">
-     Back to{" "}
-     <Link to="/login" className="text-primary">
-      Sign in
-     </Link>
-    </p>
-   </form>
-
-   <div id="loading" className="hidden">
-    <Loading />
-   </div>
-
-   <div id="error-box" className="w-full max-w-[400px] hidden text-center">
-    <h1 className="text-2xl lg:text-3xl font-medium">Error!</h1>
-    <p className="text-[14px] text-gray-500 mt-3" id="error-message"></p>
-    <button
-     className="mt-4 text-primary text-[14px]"
-     onClick={() => window.location.reload()}
+  <>
+   <div className="flex flex-col items-center justify-center px-4 py-6 min-h-screen">
+    <form
+     onSubmit={(e) => {
+      e.preventDefault();
+      submit();
+     }}
+     id="input-box"
+     className="w-full max-w-[400px]"
     >
-     Try Again
-    </button>
+     <h1 className="text-2xl lg:text-3xl font-medium">Lookup your profile</h1>
+     <div className="mt-6">
+      <Input
+       type="email"
+       id="passrst-email"
+       placeholder="Enter Email"
+       required
+       className="w-full mt-1 bg-gray-50"
+      />
+     </div>
+
+     <div className="mt-4">
+      <Button className="w-full" type="submit">
+       Reset Password
+      </Button>
+     </div>
+
+     <p className="text-[14px] text-center mt-6 text-gray-500">
+      Back to{" "}
+      <Link to="/login" className="text-primary">
+       Sign in
+      </Link>
+     </p>
+    </form>
+
+    <div id="loading" className="hidden">
+     <Loading />
+    </div>
+
+    <div id="error-box" className="w-full max-w-[400px] hidden text-center">
+     <h1 className="text-2xl lg:text-3xl font-medium">Error!</h1>
+     <p className="text-[14px] text-gray-500 mt-3" id="error-message"></p>
+     <button
+      className="mt-4 text-primary text-[14px]"
+      onClick={() => window.location.reload()}
+     >
+      Try Again
+     </button>
+    </div>
+
+    <div id="success-box" className="w-full max-w-[400px] hidden text-center">
+     <h1 className="text-2xl lg:text-3xl font-medium">Check your email</h1>
+
+     <p className="text-[14px] text-gray-500 mt-3">
+      We emailed a link to reset your password to {email}
+     </p>
+
+     <p className="text-[14px] mt-7 text-gray-500">
+      Continue to{" "}
+      <Link to="/login" className="text-primary">
+       Sign in
+      </Link>
+     </p>
+    </div>
+    <div className="w-full text-center mt-14 pb-5">
+     <p className="text-[14px] text-gray-500">
+      &copy; The Blood Project | {new Date().getFullYear()}
+     </p>
+    </div>
    </div>
-
-   <div id="success-box" className="w-full max-w-[400px] hidden text-center">
-    <h1 className="text-2xl lg:text-3xl font-medium">Check your email</h1>
-
-    <p className="text-[14px] text-gray-500 mt-3">
-     We emailed a link to reset your password to {email}
-    </p>
-
-    <p className="text-[14px] mt-7 text-gray-500">
-     Continue to{" "}
-     <Link to="/login" className="text-primary">
-      Sign in
-     </Link>
-    </p>
-   </div>
-  </div>
+  </>
  );
 }
