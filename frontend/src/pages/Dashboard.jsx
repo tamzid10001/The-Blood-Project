@@ -81,7 +81,7 @@ export default function Dashboard() {
     <div className="flex justify-between items-center">
      <h3 className="font-bold !text-[23px]">Inventory</h3>
      <Link to="/inventory">
-      <Button className="!text-[16px] font-bold !rounded-full flex justify-center items-center gap-2 !py-1.5">
+      <Button className="!text-[16px] font-bold flex justify-center items-center gap-2 !py-1.5">
        View Full Inventory{" "}
        <div className="fill-white">
         <ArrowRight />
