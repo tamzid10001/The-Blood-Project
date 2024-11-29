@@ -52,8 +52,7 @@ router.post("/create", checkLogin, async (req, res, next) => {
    id: id.trim(),
    date,
    address,
-   blood_group,
-   index: (await Inventory.find()).length + 1,
+   blood_group
   });
   res.status(201).json({
    message: "Successfully created inventory!",

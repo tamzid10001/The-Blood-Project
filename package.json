@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "build": "npm install && cd \"frontend\" && npm install && npm run build && cd ../",
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build:dev": "npm install && cd frontend && npm install && npm run build && cd ..",
+    "start:dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

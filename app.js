@@ -15,7 +15,6 @@ app.use(express.static(path.join(__dirname, "frontend/dist")));
 app.use(
  cors({
   origin: "*",
-  methods: "GET,PUT,POST,DELETE,PATCH",
  })
 );
 dotenv.config();
@@ -27,8 +26,14 @@ mongoose
  .catch((err) => console.log(err));
 
 /* application routes */
-app.use("/api/user", UserController);
-app.use("/api/inventory", InventoryController);
+app.get("/api/v1", (req, res) => {
+ res.json({
+  name: "The Blood Project API",
+  version: "1.0.0",
+ });
+});
+app.use("/api/v1/user", UserController);
+app.use("/api/v1/inventory", InventoryController);
 app.get("*", (req, res) => {
  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });

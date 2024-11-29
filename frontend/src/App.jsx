@@ -20,6 +20,17 @@ function App() {
     <Route path="/inventory" element={<Inventory />} />
     <Route path="/inventory/add" element={<AddInventory />} />
     <Route path="/settings" element={<Settings />} />
+    <Route
+     path="*"
+     element={
+      <div className="flex justify-center items-center h-screen text-center">
+       <div>
+        <h1 className="text-6xl font-bold">404</h1>
+        <p className="text-2xl font-semibold">Page not found!</p>
+       </div>
+      </div>
+     }
+    />
    </Routes>
   </>
  );

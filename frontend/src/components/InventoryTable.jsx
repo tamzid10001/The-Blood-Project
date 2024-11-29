@@ -105,7 +105,7 @@ export default function InventoryTable() {
              : () => markSold(i.id, false)
            }
           >
-           {i.is_sold ? "Sold" : "Mark Sold"}
+           {i.is_sold ? "Unmark Sold" : "Mark Sold"}
           </Button>
           <button
            className="text-primary cursor-pointer active:scale-95"
