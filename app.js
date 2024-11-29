@@ -28,7 +28,8 @@ mongoose
 /* application routes */
 app.get("/api/v1", (req, res) => {
  res.json({
-  message: "API v1!",
+  name: "The Blood Project API",
+  version: "1.0.0",
  });
 });
 app.use("/api/v1/user", UserController);
