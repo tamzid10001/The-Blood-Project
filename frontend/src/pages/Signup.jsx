@@ -23,59 +23,66 @@ export default function Signup() {
   );
  }
  return (
-  <div className="flex justify-center items-center h-screen">
-   <form
-    onSubmit={(e) => {
-     e.preventDefault();
-     submit();
-    }}
-    className="w-full max-w-[400px]"
-   >
-    <h1 className="text-2xl lg:text-3xl font-medium">Sign-up</h1>
+  <>
+   <div className="flex flex-col items-center justify-center px-4 py-14 min-h-screen">
+    <form
+     onSubmit={(e) => {
+      e.preventDefault();
+      submit();
+     }}
+     className="w-full max-w-[400px]"
+    >
+     <h1 className="text-2xl lg:text-3xl font-medium">Sign-up</h1>
 
-    <div className="mt-6">
-     <Label for="signup-name" className="mb-5">
-      Name
-     </Label>
-     <Input type="text" id="signup-name" className="w-full mt-1" required />
-    </div>
+     <div className="mt-6">
+      <Label for="signup-name" className="mb-5">
+       Name
+      </Label>
+      <Input type="text" id="signup-name" className="w-full mt-1" required />
+     </div>
 
-    <div className="mt-6">
-     <Label for="signup-bname" className="mb-5">
-      Blood Bank Name
-     </Label>
-     <Input type="text" id="signup-bname" className="w-full mt-1" required />
-    </div>
+     <div className="mt-6">
+      <Label for="signup-bname" className="mb-5">
+       Blood Bank Name
+      </Label>
+      <Input type="text" id="signup-bname" className="w-full mt-1" required />
+     </div>
 
-    <div className="mt-3">
-     <Label for="signup-email" className="mb-5">
-      Email
-     </Label>
-     <Input type="email" id="signup-email" className="w-full mt-1" required />
-    </div>
+     <div className="mt-3">
+      <Label for="signup-email" className="mb-5">
+       Email
+      </Label>
+      <Input type="email" id="signup-email" className="w-full mt-1" required />
+     </div>
 
-    <div className="mt-3">
-     <Label for="signup-password">Password</Label>
-     <Input
-      type="password"
-      id="signup-password"
-      className="w-full mt-1"
-      required
-     />
-    </div>
+     <div className="mt-3">
+      <Label for="signup-password">Password</Label>
+      <Input
+       type="password"
+       id="signup-password"
+       className="w-full mt-1"
+       required
+      />
+     </div>
 
-    <div className="mt-7">
-     <Button type="submit" className="w-full">
-      Create account
-     </Button>
+     <div className="mt-7">
+      <Button type="submit" className="w-full">
+       Create account
+      </Button>
+     </div>
+     <p className="text-[14px] text-center mt-4 text-gray-500">
+      Have an account already?{" "}
+      <Link to="/login" className="text-primary">
+       Sign in
+      </Link>
+     </p>
+    </form>
+    <div className="w-full text-center mt-14 pb-5">
+     <p className="text-[14px] text-gray-500">
+      &copy; The Blood Project | {new Date().getFullYear()}
+     </p>
     </div>
-    <p className="text-[14px] text-center mt-4 text-gray-500">
-     Have an account already?{" "}
-     <Link to="/login" className="text-primary">
-      Sign in
-     </Link>
-    </p>
-   </form>
-  </div>
+   </div>
+  </>
  );
 }

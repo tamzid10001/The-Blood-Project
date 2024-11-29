@@ -5,7 +5,6 @@ import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Inventory from "./pages/Inventory";
 import AddInventory from "./pages/AddInventory";
-import Settings from "./pages/Settings";
 import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -19,11 +18,10 @@ function App() {
     <Route path="/" element={<Dashboard />} />
     <Route path="/inventory" element={<Inventory />} />
     <Route path="/inventory/add" element={<AddInventory />} />
-    <Route path="/settings" element={<Settings />} />
     <Route
      path="*"
      element={
-      <div className="flex justify-center items-center h-screen text-center">
+      <div className="flex justify-center items-center min-h-screen text-center">
        <div>
         <h1 className="text-6xl font-bold">404</h1>
         <p className="text-2xl font-semibold">Page not found!</p>

@@ -73,7 +73,7 @@ export default function Layout(props) {
     <aside
      className={`fixed z-40 ${
       !open && "left-[-1000px]"
-     } px-10 lg:ps-0 bg-white lg:sticky lg:top-0 left-0 w-full h-[72vh] lg:max-w-[245px] overflow-y-auto`}
+     } px-10 lg:ps-0 bg-white lg:sticky lg:top-0 left-0 h-[72vh] lg:min-w-[245px] lg:max-w-[320px] overflow-y-auto`}
     >
      <div>
       <hr className="mb-4 border-t-2" />
@@ -140,7 +140,7 @@ export default function Layout(props) {
      </div>
      <div className="md:fixed bottom-[40px]">
       <p className="text-gray-400 text-[16px] mt-8">
-       &copy; The Blood Project | 2025
+       &copy; The Blood Project | {new Date().getFullYear()}
       </p>
      </div>
     </aside>

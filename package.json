@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "build:dev": "npm install && cd frontend && npm install && npm run build && cd ..",
-    "start:dev": "nodemon app.js"
+    "start:dev": "cross-env NODE_ENV=development nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "nodemailer": "^6.9.16"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.7"
   }
 }
