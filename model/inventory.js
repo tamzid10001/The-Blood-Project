@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const inventorySchema = mongoose.Schema(
  {
-  index: {
-   type: Number,
+  id: {
+   type: String || Number,
    required: true,
    unique: true,
   },
@@ -24,11 +24,6 @@ const inventorySchema = mongoose.Schema(
      message: "Name must be longer than 2 and shorter than 20 characters!",
     },
    ],
-  },
-  id: {
-   type: String || Number,
-   required: true,
-   unique: true,
   },
   date: {
    type: Date,
