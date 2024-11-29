@@ -7,6 +7,11 @@ const inventorySchema = mongoose.Schema(
    required: true,
    unique: true,
   },
+  user: {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: "User",
+   required: true,
+  },
   donor_name: {
    type: String,
    required: true,
