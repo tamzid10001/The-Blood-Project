@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
 const checkLogin = require("./middlewares/checkLogin");
-const userSchema = require("../model/user");
+const userSchema = require("../models/user");
 const sendEmail = require("./utils/email");
 
 /* User model */

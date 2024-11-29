@@ -4,8 +4,8 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
 
-const UserController = require("./controller/UserController");
-const InventoryController = require("./controller/InventoryController");
+const UserController = require("./controllers/UserController");
+const InventoryController = require("./controllers/InventoryController");
 const PORT = process.env.PORT || 3000;
 
 /* express app initialization */
@@ -43,18 +43,13 @@ app.use((err, req, res, next) => {
  if (req.headersSent) {
   return next(err);
  }
- if (process.env.NODE_ENV === "development") {
-  res.status(500).json({
-   error: err.message || err,
-   stack: err.stack || "",
-  });
- } else {
-  res.status(500).json({
-   error: "Internal server error!",
-  });
- }
+ res.status(500).json({
+  error: err.message || err || "Internal Server Error",
+ });
 });
 
 app.listen(PORT, () => {
  console.log(`Running on http://localhost:${PORT}`);
 });
+
+module.exports = app;

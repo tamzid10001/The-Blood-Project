@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const router = express.Router();
 
 const checkLogin = require("./middlewares/checkLogin");
-const inventorySchema = require("../model/inventory");
+const inventorySchema = require("../models/inventory");
 
 /* Inventory model */
 const Inventory = mongoose.model("Inventory", inventorySchema);
 
-/* GET - inventory lists */
+/* GET - inventory list of a user */
 router.get("/", checkLogin, async (req, res, next) => {
  try {
-  const data = await Inventory.find();
+  const data = await Inventory.find({ user: req.userId });
   res.status(200).json({
    message: "Successfully retrieved inventory lists!",
    data,
@@ -21,38 +21,18 @@ router.get("/", checkLogin, async (req, res, next) => {
  }
 });
 
-/* POST - inventory lists by date */
-router.post("/byDate", checkLogin, async (req, res, next) => {
- try {
-  const { from, to } = req.body;
-  const data = await Inventory.find();
-  const specificData = await Inventory.find({
-   date: { $gte: from, $lte: to },
-  });
-  res.status(200).json({
-   message: "Successfully retrieved inventory lists!",
-   info: {
-    total: data.length,
-    from: specificData[0].index,
-    to: specificData[specificData.length - 1].index,
-   },
-   data: specificData,
-  });
- } catch (err) {
-  return next(err);
- }
-});
-
-/* POST - create inventory */
+/* POST - create inventory by a user */
 router.post("/create", checkLogin, async (req, res, next) => {
  try {
   const { donor_name, id, date, address, blood_group } = req.body;
+  const user = new mongoose.Types.ObjectId(`${req.userId}`);
   const data = await Inventory.create({
    donor_name,
-   id: id.trim(),
+   id,
    date,
    address,
-   blood_group
+   blood_group,
+   user,
   });
   res.status(201).json({
    message: "Successfully created inventory!",
@@ -63,12 +43,13 @@ router.post("/create", checkLogin, async (req, res, next) => {
  }
 });
 
-/* PUT - make is_sold true */
+/* PUT - mark a inventory of a user as sold */
 router.put("/sold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
+  const userId = new mongoose.Types.ObjectId(`${req.userId}`);
   const item = await Inventory.findOneAndUpdate(
-   { id: id.trim() },
+   { id: id.trim(), user: userId },
    { $set: { is_sold: true } }
   );
   if (!item) {
@@ -82,12 +63,13 @@ router.put("/sold/:id", checkLogin, async (req, res, next) => {
  }
 });
 
-/* PUT - make is_sold false */
+/* PUT - mark a inventory of a user as unsold */
 router.put("/unsold/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
+  const userId = new mongoose.Types.ObjectId(`${req.userId}`);
   const item = await Inventory.findOneAndUpdate(
-   { id: id.trim() },
+   { id: id.trim(), user: userId },
    { $set: { is_sold: false } }
   );
   if (!item) {
@@ -101,11 +83,12 @@ router.put("/unsold/:id", checkLogin, async (req, res, next) => {
  }
 });
 
-/* DELETE - delete inventory */
+/* DELETE - delete inventory of a user */
 router.delete("/delete/:id", checkLogin, async (req, res, next) => {
  try {
   const { id } = req.params;
-  await Inventory.findOneAndDelete({ id: id.trim() });
+  const userId = new mongoose.Types.ObjectId(`${req.userId}`);
+  await Inventory.findOneAndDelete({ id: id.trim(), user: userId });
   res.status(200).json({
    message: "Successfully deleted inventory!",
   });
@@ -114,10 +97,14 @@ router.delete("/delete/:id", checkLogin, async (req, res, next) => {
  }
 });
 
-/* GET - get quantity by blood group */
+/* GET - get quantity by blood group of a user */
 router.get("/quantity", checkLogin, async (req, res, next) => {
  try {
+  const userId = new mongoose.Types.ObjectId(`${req.userId}`);
   const data = await Inventory.aggregate([
+   {
+    $match: { user: userId },
+   },
    {
     $group: {
      _id: "$blood_group",
@@ -125,6 +112,7 @@ router.get("/quantity", checkLogin, async (req, res, next) => {
     },
    },
   ]);
+
   res.status(200).json({
    message: "Successfully retrieved quantity by blood group!",
    data,
