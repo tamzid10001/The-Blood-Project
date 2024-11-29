@@ -26,8 +26,13 @@ mongoose
  .catch((err) => console.log(err));
 
 /* application routes */
-app.use("/api/user", UserController);
-app.use("/api/inventory", InventoryController);
+app.get("/api/v1", (req, res) => {
+ res.json({
+  message: "API v1!",
+ });
+});
+app.use("/api/v1/user", UserController);
+app.use("/api/v1/inventory", InventoryController);
 app.get("*", (req, res) => {
  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });

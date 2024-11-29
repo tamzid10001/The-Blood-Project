@@ -1,5 +1,5 @@
 export const getTodos = async (error, callback) => {
- return await fetch("/api/todo", {
+ return await fetch("/api/v1/todo", {
   method: "GET",
   headers: {
    "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const getTodos = async (error, callback) => {
 };
 
 export const addTodo = async (data, error, callback) => {
- return await fetch("/api/todo", {
+ return await fetch("/api/v1/todo", {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const addTodo = async (data, error, callback) => {
 };
 
 export const deleteTodo = async (id, error, callback) => {
- return await fetch("/api/todo/" + id, {
+ return await fetch("/api/v1/todo/" + id, {
   method: "DELETE",
   headers: {
    "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const deleteTodo = async (id, error, callback) => {
 };
 
 export const updateTodo = async (id, data, error, callback) => {
- return await fetch("/api/todo/" + id, {
+ return await fetch("/api/v1/todo/" + id, {
   method: "PUT",
   headers: {
    "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export const updateTodo = async (id, data, error, callback) => {
 };
 
 export const changeTodoStatus = async (id, status, error, callback) => {
- return await fetch("/api/todo/status/" + id, {
+ return await fetch("/api/v1/todo/status/" + id, {
   method: "PUT",
   headers: {
    "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export const changeTodoStatus = async (id, status, error, callback) => {
 };
 
 export const signUp = async (data, error, callback) => {
- return await fetch("/api/user/signup", {
+ return await fetch("/api/v1/user/signup", {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export const signUp = async (data, error, callback) => {
 };
 
 export const logIn = async (data, error, callback) => {
- return await fetch("/api/user/login", {
+ return await fetch("/api/v1/user/login", {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export const logIn = async (data, error, callback) => {
 };
 
 export const verifyToken = async (error, callback) => {
- return await fetch("/api/user/verify", {
+ return await fetch("/api/v1/user/verify", {
   method: "GET",
   headers: {
    "Content-Type": "application/json",
@@ -197,7 +197,7 @@ export const verifyToken = async (error, callback) => {
 };
 
 export const getUserData = async (error, callback) => {
- return await fetch("/api/user", {
+ return await fetch("/api/v1/user", {
   method: "GET",
   headers: {
    "Content-Type": "application/json",
@@ -221,7 +221,7 @@ export const getUserData = async (error, callback) => {
 };
 
 export const forgotPassword = async (data, error, callback) => {
- return await fetch("/api/user/forgot-password", {
+ return await fetch("/api/v1/user/forgot-password", {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -245,7 +245,7 @@ export const forgotPassword = async (data, error, callback) => {
 };
 
 export const resetPassword = async (data, error, callback) => {
- return await fetch(`/api/user/reset-password/${data.token}`, {
+ return await fetch(`/api/v1/user/reset-password/${data.token}`, {
   method: "PATCH",
   headers: {
    "Content-Type": "application/json",
@@ -271,7 +271,7 @@ export const resetPassword = async (data, error, callback) => {
 };
 
 export const getInventory = async (error, callback) => {
- return await fetch("/api/inventory", {
+ return await fetch("/api/v1/inventory", {
   method: "GET",
   headers: {
    "Content-Type": "application/json",
@@ -295,7 +295,7 @@ export const getInventory = async (error, callback) => {
 };
 
 export const getInventoryByDate = async (from, to, error, callback) => {
- return await fetch(`/api/inventory/byDate`, {
+ return await fetch(`/api/v1/inventory/byDate`, {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -323,7 +323,7 @@ export const getInventoryByDate = async (from, to, error, callback) => {
 };
 
 export const addInventory = async (data, error, callback) => {
- return await fetch(`/api/inventory/create`, {
+ return await fetch(`/api/v1/inventory/create`, {
   method: "POST",
   headers: {
    "Content-Type": "application/json",
@@ -348,7 +348,7 @@ export const addInventory = async (data, error, callback) => {
 };
 
 export const changeIsSold = async (id, status, error, callback) => {
- return await fetch(`/api/inventory/${status ? "" : "un"}sold/${id}`, {
+ return await fetch(`/api/v1/inventory/${status ? "" : "un"}sold/${id}`, {
   method: "PUT",
   headers: {
    "Content-Type": "application/json",
@@ -372,7 +372,7 @@ export const changeIsSold = async (id, status, error, callback) => {
 };
 
 export const deleteInventory = async (id, error, callback) => {
- return await fetch(`/api/inventory/delete/${id}`, {
+ return await fetch(`/api/v1/inventory/delete/${id}`, {
   method: "DELETE",
   headers: {
    "Content-Type": "application/json",
@@ -396,7 +396,7 @@ export const deleteInventory = async (id, error, callback) => {
 };
 
 export const getQuantityByBloodGroup = async (error, callback) => {
- return await fetch(`/api/inventory/quantity`, {
+ return await fetch(`/api/v1/inventory/quantity`, {
   method: "GET",
   headers: {
    "Content-Type": "application/json",
