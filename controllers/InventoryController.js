@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 
 const checkLogin = require("./middlewares/checkLogin");
-const inventorySchema = require("../model/inventory");
+const inventorySchema = require("../models/inventory");
 
 /* Inventory model */
 const Inventory = mongoose.model("Inventory", inventorySchema);
@@ -52,7 +52,7 @@ router.post("/create", checkLogin, async (req, res, next) => {
    id: id.trim(),
    date,
    address,
-   blood_group
+   blood_group,
   });
   res.status(201).json({
    message: "Successfully created inventory!",
