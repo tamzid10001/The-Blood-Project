@@ -81,12 +81,12 @@ export default function Dashboard() {
     <div className="flex justify-between items-center">
      <h3 className="font-bold !text-[23px]">Inventory</h3>
      <Link to="/inventory">
-      <Button className="!text-[16px] font-bold flex justify-center items-center gap-2 !py-1.5">
-       View Full Inventory{" "}
-       <div className="fill-white">
-        <ArrowRight />
-       </div>
-      </Button>
+      <Button className="!text-[16px] font-bold flex justify-center items-center gap-2 !py-1.5 rounded-md">
+  View Full Inventory{" "}
+  <div className="fill-white">
+    <ArrowRight />
+  </div>
+</Button>
      </Link>
     </div>
     <hr className="border-t-2 mt-4" />
