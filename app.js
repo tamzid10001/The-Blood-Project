@@ -43,16 +43,9 @@ app.use((err, req, res, next) => {
  if (req.headersSent) {
   return next(err);
  }
- if (process.env.NODE_ENV === "development") {
-  res.status(500).json({
-   error: err.message || err,
-   stack: err.stack || "",
-  });
- } else {
-  res.status(500).json({
-   error: "Internal server error!",
-  });
- }
+ res.status(500).json({
+  error: err.message || err || "Internal Server Error",
+ });
 });
 
 app.listen(PORT, () => {
